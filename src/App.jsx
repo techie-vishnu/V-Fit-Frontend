@@ -1,17 +1,28 @@
-import { useState } from 'react'
 import './App.css'
-import AdminPanel from './components/layout/adminPanel'
+import { BrowserRouter, Routes, Route } from "react-router";
+import AppLayout from './components/layout/AppLayout';
+import Login from './components/user/Login';
+import Logout from './components/user/Logout';
+import { UserRoute } from './components/protectedPoutes/UserRoute';
+import Dashboard from './components/pages/Dashboard';
+import Users from './components/pages/Users';
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      {/* <h1 class="text-3xl font-bold underline">
-        Hello world!
-      </h1> */}
-      <AdminPanel />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<UserRoute><Dashboard /></UserRoute>} />
+
+          {/* Admin Only pages */}
+          <Route path="/users" element={<UserRoute isAdmin={true}><Users /></UserRoute>} />
+
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

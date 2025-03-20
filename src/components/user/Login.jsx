@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate, NavLink } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router';
 import Alert from 'react-bootstrap/Alert';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserData } from '../../store/user/userSlice';
@@ -111,9 +111,9 @@ function Login() {
                                         <div className="mt-4 pt-2">
                                             <input className="btn btn-secondary btn-lg w-100" id="submitBtn" type="submit" value="Sign In" onClick={handleLoginClick} />
                                         </div>
-                                        <div className="mt-4 pt-2 text-center">
+                                        {/* <div className="mt-4 pt-2 text-center">
                                             Don't have an Account? <NavLink to="/signup">SignUp</NavLink>
-                                        </div>
+                                        </div> */}
                                     </form>
                                 </div>
                             </div>

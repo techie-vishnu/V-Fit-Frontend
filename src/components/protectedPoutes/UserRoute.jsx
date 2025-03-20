@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useSelector } from 'react-redux';
-
+import { jwtDecode } from "jwt-decode";
 
 export const UserRoute = ({ children, isAdmin = false }) => {
     const [data, setData] = useState(null);
@@ -12,7 +12,12 @@ export const UserRoute = ({ children, isAdmin = false }) => {
     const checkUserLoggedIn = () => {
         try {
             // const res = await axios.get(import.meta.env.VITE_BACKEND_BASEURL + '/api/user/profile', { withCredentials: true });
-            if (userData !== null) {
+            const currentTime = new Date().getTime() / 1000;
+            const token = sessionStorage.getItem('token');
+            if (userData !== null || !token) {
+                if (currentTime > jwtDecode(token).exp) {
+                    navigate('/logout');
+                }
                 if (isAdmin) {
                     if (Array.isArray(userData.roles) && userData.roles.includes('Admin')) {
                         setData(userData);

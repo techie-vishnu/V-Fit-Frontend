@@ -28,7 +28,7 @@ function Header({ toggleSidebar, toggleDarkMode, isDarkMode }) {
                     </button>
                     {isDropdownOpen && (
                         <div className="tw:absolute tw:right-0 tw:mt-5 tw:w-48 tw:bg-white tw:dark:bg-gray-800 tw:rounded tw:shadow-lg">
-                            <ul className="py-2 px-auto tw:text-gray-700 tw:dark:text-gray-200">
+                            <ul className="m-0 p-0 tw:text-gray-700 tw:dark:text-gray-200">
                                 <li className="tw:px-4 tw:py-2 tw:hover:bg-gray-100 tw:dark:tw:hover:bg-gray-700">Profile</li>
                                 <li className="tw:px-4 tw:py-2 tw:hover:bg-gray-100 tw:dark:tw:hover:bg-gray-700">Settings</li>
                                 <li className="tw:px-4 tw:py-2 tw:hover:bg-gray-100 tw:dark:tw:hover:bg-gray-700">Logout</li>

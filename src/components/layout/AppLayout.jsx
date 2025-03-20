@@ -4,7 +4,7 @@ import Sidebar1 from './Sidebar1';
 import Header from './Header';
 import ContentArea from './ContentArea';
 
-function AdminPanel() {
+function AppLayout() {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -30,4 +30,4 @@ function AdminPanel() {
     )
 }
 
-export default AdminPanel
+export default AppLayout

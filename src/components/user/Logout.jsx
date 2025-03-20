@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearUserData } from '../../store/user/userSlice';
 
