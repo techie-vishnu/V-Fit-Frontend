@@ -4,6 +4,7 @@ import { useNavigate, NavLink } from 'react-router';
 import Alert from 'react-bootstrap/Alert';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserData } from '../../store/user/userSlice';
+import logo from "../../assets/logo.png";
 
 
 function Login() {
@@ -81,6 +82,9 @@ function Login() {
                         <div className="col-12 col-lg-6">
                             <div className="card rounded-4 shadow card-registration">
                                 <div className="card-body p-4 p-md-5">
+                                    <div className='d-flex justify-content-center align-items-center'>
+                                        <img src={logo} width={50} className='tw:duration-500 tw:hover:rotate-[360deg]'/>
+                                    </div>
                                     <h3 className='text-center mb-5'>Login</h3>
                                     <section id="alert-section">
                                         {showAlert &&

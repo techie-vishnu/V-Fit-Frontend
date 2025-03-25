@@ -1,25 +1,60 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import { FaAngleLeft } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
 import { RxPerson } from "react-icons/rx";
 import { RxGear } from "react-icons/rx";
+import { GiWeightLiftingUp } from "react-icons/gi";
+import { RiMoneyRupeeCircleLine } from "react-icons/ri";
+import { HiOutlineAdjustments } from "react-icons/hi";
 import logo from "../../assets/logo.png";
 import { NavLink, useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 
 
 function Sidebar1({ isCollapsed, toggleSidebar }) {
     let navigate = useNavigate();
-    const Menus = [
-        { title: "Dashboard", icon: <RxDashboard />, link: '/' },
-        { title: "Users", icon: <RxPerson />, link: '/users' },
-        // { title: "Loyalty Cards", src: "Card", gap: true },
-        // { title: "Subscriptions", src: "Calendar" },
-        // { title: "Debts", src: "Debt" },
-        // { title: "Legal information", src: "Legal" },
-        // { title: "Notifications ", src: "Notifications", gap: true },
-        { title: "Settings", icon: <RxGear />, link: '/' },
-    ];
+    const userData = useSelector(state => state.user.userData);
+    const [Menus, setMenus] = useState([]);
+
+    const buildSideMenu = () => {
+        if (userData.roles.indexOf('Admin') !== -1) {
+            setMenus([
+                { title: "Dashboard", icon: <RxDashboard />, link: '/' },
+                // { title: "Settings", icon: <RxGear />, link: '/', gap: true },
+                { title: "Users", icon: <RxPerson />, link: '/users' },
+                { title: "Memberships", icon: <RiMoneyRupeeCircleLine />, link: '/memberships' },
+                { title: "Plans", icon: <HiOutlineAdjustments />, link: '/plans' },
+                { title: "Workouts", icon: <GiWeightLiftingUp />, link: '/workouts' }
+
+            ])
+        }
+        else if (userData.roles.indexOf('Receptionist') !== -1) {
+            setMenus([
+                { title: "Dashboard", icon: <RxDashboard />, link: '/' },
+                { title: "Memberships", icon: <RiMoneyRupeeCircleLine />, link: '/users' },
+                { title: "Clients", icon: <GiWeightLiftingUp />, link: '/' }
+            ])
+        }
+        else if (userData.roles.indexOf('Trainer') !== -1) {
+            setMenus([
+                { title: "Dashboard", icon: <RxDashboard />, link: '/' },
+                { title: "My Clients", icon: <GiWeightLiftingUp />, link: '/' },
+            ])
+        }
+        else {
+            setMenus([
+                { title: "Home", icon: <RxDashboard />, link: '/' },
+                { title: "Workouts", icon: <GiWeightLiftingUp />, link: '/workouts' }
+
+            ])
+        }
+    }
+
+    useEffect(() => {
+        buildSideMenu();
+    }, [userData]);
+    
 
     return (
         <div className="tw:flex">
@@ -38,8 +73,8 @@ function Sidebar1({ isCollapsed, toggleSidebar }) {
                 <ul className={`tw:pt-6 ${isCollapsed && "ps-2"}`}>
                     {
                         Menus.map((Menu, index) => (
-                            <li key={index} onClick={() => { navigate(Menu.link)}}
-                                className={`tw:flex tw:rounded-md tw:p-2 tw:cursor-pointer hover:tw:bg-light-white tw:text-black tw:dark:text-gray-300 tw:text-lg tw:font-medium tw:items-center tw:gap-x-4 ${Menu.gap ? " tw:mt-9" : " tw:mt-2"} ${index === 0 && "tw:bg-light-white "} `}>
+                            <li key={index} onClick={() => { navigate(Menu.link) }}
+                                className={`tw:flex tw:rounded-md tw:p-2 tw:cursor-pointer tw:text-black tw:dark:text-gray-300 tw:text-lg tw:font-medium tw:items-center tw:gap-x-4 ${Menu.gap ? " tw:mt-9" : " tw:mt-2"} ${index === 0 && "tw:bg-light-white "} `}>
                                 {Menu.src && <img src={`/assets/${Menu.src}.svg`} />}
                                 {Menu.icon && Menu.icon}
                                 <span className={`${isCollapsed && "tw:hidden"} tw:origin-left tw:duration-200`}>
