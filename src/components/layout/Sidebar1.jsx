@@ -52,9 +52,10 @@ function Sidebar1({ isCollapsed, toggleSidebar }) {
     }
 
     useEffect(() => {
-        buildSideMenu();
+        if (userData)
+            buildSideMenu();
     }, [userData]);
-    
+
 
     return (
         <div className="tw:flex">

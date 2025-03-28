@@ -25,7 +25,7 @@ function Header({ toggleSidebar, toggleDarkMode, isDarkMode }) {
                 {/* User Dropdown */}
                 <div className="tw:relative">
                     <button onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="tw:flex tw:items-center tw:gap-x-2">
-                        <span className="tw:text-gray-700 tw:dark:text-gray-200">{userData.name}</span>
+                        <span className="tw:text-gray-700 tw:dark:text-gray-200">{userData && userData.name ? userData.name : `User`}</span>
                         <svg className="tw:w-4 tw:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                         </svg>

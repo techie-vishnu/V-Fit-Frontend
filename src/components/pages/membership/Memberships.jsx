@@ -18,7 +18,7 @@ function Memberships() {
 
   // Membership Form Modal
   const [showMembershipModal, setShowMembershipModal] = useState(false);
-  const newMembership = { _id: null, name: "", username: "", email: "", mobile: "", gender: "", roles: ['Client'], password: "", confirmPassword: "" };
+  const newMembership = { _id: null, userId: "", planId: "", price: '', personalTraining: false, startDate: new Date().toISOString().split('T')[0], paymentStatus: false, status: "Pending" };
   const [membershipData, setMembershipData] = useState(newMembership);
   const [isEdit, setIsEdit] = useState(true);
 
@@ -31,16 +31,17 @@ function Memberships() {
   const handleEdit = async (id) => {
     const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/memberships/${id}`, apiConfig);
     if (response.data.success) {
-      const data = response.data.user;
+      const data = response.data.data;
       setIsEdit(true);
-      // membershipData._id = data._id;
-      // membershipData.name = data.name;
-      // membershipData.username = data.username;
-      // membershipData.email = data.email;
-      // membershipData.mobile = data.mobile;
-      // membershipData.gender = data.gender;
-      // membershipData.roles = data.roles;
-      // membershipData.password = membershipData.confirmPassword = '';
+      membershipData._id = data._id;
+      membershipData.userId = data.userId;
+      membershipData.planId = data.planId;
+      membershipData.price = data.price;
+      membershipData.personalTraining = data.personalTraining;
+      membershipData.startDate = new Date(data.startDate).toISOString().split('T')[0];
+      membershipData.paymentStatus = data.paymentStatus;
+      membershipData.status = data.status;
+      setMembershipData(membershipData);
       setShowMembershipModal(true);
     }
   }
@@ -110,7 +111,7 @@ function Memberships() {
             </InputGroup>
           </Col>
           <Col>
-            <Button variant='secondary' onClick={handleAdd}>Add User</Button>
+            <Button variant='secondary' onClick={handleAdd}>Add Membership</Button>
           </Col>
         </Row>
 
@@ -121,19 +122,23 @@ function Memberships() {
               <th onClick={() => handleSort('_id')}>
                 ID {sortConfig.key === '_id' ? (sortConfig.direction === 'asc' ? '↑' : '↓') : ''}
               </th>
-              <th onClick={() => handleSort('name')}>
-                Name {sortConfig.key === 'name' ? (sortConfig.direction === 'asc' ? '↑' : '↓') : ''}
+              <th>
+                User
               </th>
-              <th onClick={() => handleSort('username')}>
-                Username {sortConfig.key === 'username' ? (sortConfig.direction === 'asc' ? '↑' : '↓') : ''}
+              <th>
+                Plan
               </th>
-              <th onClick={() => handleSort('email')}>
-                Email {sortConfig.key === 'email' ? (sortConfig.direction === 'asc' ? '↑' : '↓') : ''}
+              <th onClick={() => handleSort('price')}>
+                Price {sortConfig.key === 'price' ? (sortConfig.direction === 'asc' ? '↑' : '↓') : ''}
               </th>
-              <th>Mobile</th>
-              <th onClick={() => handleSort('gender')}>
-                Gender {sortConfig.key === 'gender' ? (sortConfig.direction === 'asc' ? '↑' : '↓') : ''}
+              <th onClick={() => handleSort('startDate')}>
+                Start Date {sortConfig.key === 'startDate' ? (sortConfig.direction === 'asc' ? '↑' : '↓') : ''}
               </th>
+              <th onClick={() => handleSort('endDate')}>
+                End Date {sortConfig.key === 'endDate' ? (sortConfig.direction === 'asc' ? '↑' : '↓') : ''}
+              </th>
+              <th>Payment Status</th>
+              <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -141,13 +146,15 @@ function Memberships() {
             {data.map((item, index) => (
               <tr key={item._id}>
                 <td>{item._id}</td>
-                <td>{item.name}</td>
-                <td>{item.username}</td>
-                <td>{item.email}</td>
-                <td>{item.mobile}</td>
-                <td>{item.gender}</td>
+                <td>{item.userId.name}</td>
+                <td>{item.planId.name}</td>
+                <td>{item.planId.price}</td>
+                <td>{new Date(item.startDate).toISOString().split('T')[0]}</td>
+                <td>{new Date(item.endDate).toISOString().split('T')[0]}</td>
+                <td>{item.paymentStatus ? 'Paid' : 'Unpaid'}</td>
+                <td>{item.status}</td>
                 <td>
-                  <Button variant="success" onClick={() => { handleUserEdit(item._id) }}>Edit</Button>
+                  <Button variant="success" onClick={() => { handleEdit(item._id) }}>Edit</Button>
                 </td>
               </tr>
             ))}
@@ -184,12 +191,12 @@ function Memberships() {
         </div>
       </div>
 
-      {/* <UserFormModal
-        showUserModal={showUserModal}
-        setShowUserModal={setShowUserModal}
-        data={userData}
-        isUserEdit={isUserEdit}
-      /> */}
+      <MembershipFormModal
+        data={membershipData}
+        isEdit={isEdit}
+        setShowModal={setShowMembershipModal}
+        showModal={showMembershipModal}
+      />
     </>
   )
 }
