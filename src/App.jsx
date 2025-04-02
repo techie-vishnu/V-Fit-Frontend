@@ -9,7 +9,7 @@ import Users from './components/pages/users/Users';
 import NotFound from './components/notFound/NotFound';
 import Memberships from './components/pages/membership/Memberships';
 import MembershipPlans from './components/pages/membership/MembershipPlans';
-import Workouts from './components/pages/Workouts';
+import Workouts from './components/pages/workouts/Workouts';
 
 
 function App() {

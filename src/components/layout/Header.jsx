@@ -8,7 +8,7 @@ function Header({ toggleSidebar, toggleDarkMode, isDarkMode }) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     return (
-        <header className="tw:bg-white tw:dark:bg-gray-900 tw:shadow tw:p-4 tw:flex tw:justify-between tw:items-center">
+        <header className="tw:bg-white tw:dark:bg-gray-700 tw:shadow tw:p-4 tw:flex tw:justify-between tw:items-center">
             {/* Sidebar Toggle Button (Left) */}
             <button onClick={toggleSidebar} className="tw:md:invisible tw:p-2 tw:bg-gray-200 tw:dark:bg-gray-700 tw:rounded">
                 <svg className="tw:w-6 tw:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
