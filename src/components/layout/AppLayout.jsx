@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Sidebar from './Sidebar';
-import Sidebar1 from './Sidebar1';
 import Header from './Header';
 import ContentArea from './ContentArea';
 
@@ -19,9 +18,8 @@ function AppLayout() {
     return (
         <>
             <div className={`tw:flex tw:min-h-screen ${isDarkMode ? 'dark' : ''}`}>
-                {/* <Sidebar isCollapsed={isCollapsed} toggleSidebar={toggleSidebar} /> */}
-                <Sidebar1 isCollapsed={isCollapsed} toggleSidebar={toggleSidebar} />
-                <div className="tw:flex-1 tw:flex tw:flex-col">
+                <Sidebar isCollapsed={isCollapsed} toggleSidebar={toggleSidebar} />
+                <div className="tw:flex-1 tw:flex tw:flex-col tw:w-full">
                     <Header toggleSidebar={toggleSidebar} toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
                     <ContentArea />
                 </div>
