@@ -48,7 +48,6 @@ function SignUp() {
         }, 5000);
     }
     const validateForm = () => {
-        console.log(data);
         // form validation
         if (data.name.trim() == '') {
             setErrorMessage('Name is required.');

@@ -41,17 +41,14 @@ function Login() {
                         setErrorMessage('Login failed. Try Again.');
                     }
                 }).catch((error) => {
-                    if (error.data.error)
-                        setErrorMessage(error.data.error);
+                    if (error.response.data.error)
+                        setErrorMessage(error.response.data.error);
                     else
                         setErrorMessage('Login failed. Try Again.');
                 });
             } catch (error) {
                 setErrorMessage(error.message);
             }
-            setTimeout(() => {
-                setErrorMessage('');
-            }, 3000);
         }
     }
     const validateForm = () => {
@@ -74,6 +71,12 @@ function Login() {
             setShowAlert(false);
     }, [errorMessage]);
 
+    useEffect(() => {
+        setTimeout(() => {
+            setErrorMessage('');
+        }, 3000);
+    }, [showAlert]);
+
     return (
         <>
             <section className="">
@@ -83,7 +86,7 @@ function Login() {
                             <div className="card rounded-4 shadow card-registration">
                                 <div className="card-body p-4 p-md-5">
                                     <div className='d-flex justify-content-center align-items-center'>
-                                        <img src={logo} width={50} className='tw:duration-500 tw:hover:rotate-[360deg]'/>
+                                        <img src={logo} width={50} className='tw:duration-500 tw:hover:rotate-[360deg]' />
                                     </div>
                                     <h3 className='text-center mb-5'>Login</h3>
                                     <section id="alert-section">

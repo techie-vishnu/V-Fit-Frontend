@@ -18,9 +18,9 @@ function Header({ toggleSidebar, toggleDarkMode, isDarkMode }) {
 
             {/* Dark Mode Toggle Button (Right) */}
             <div className="tw:flex tw:items-center tw:gap-x-4">
-                <button onClick={toggleDarkMode} className="tw:p-2 tw:bg-gray-200 tw:dark:bg-gray-700 tw:rounded">
+                {/* <button onClick={toggleDarkMode} className="tw:p-2 tw:bg-gray-200 tw:dark:bg-gray-700 tw:rounded">
                     {isDarkMode ? '🌞' : '🌙'}
-                </button>
+                </button> */}
 
                 {/* User Dropdown */}
                 <div className="tw:relative">
@@ -33,9 +33,9 @@ function Header({ toggleSidebar, toggleDarkMode, isDarkMode }) {
                     {isDropdownOpen && (
                         <div className="tw:absolute tw:right-0 tw:mt-5 tw:w-48 tw:bg-white tw:dark:bg-gray-800 tw:rounded tw:shadow-lg">
                             <ul className="m-0 p-0 tw:text-gray-700 tw:dark:text-gray-200">
-                                {/* <li className="tw:cursor-pointer tw:px-4 tw:py-2 tw:hover:bg-gray-100 tw:dark:tw:hover:bg-gray-700" as={NavLink} to={'/'}>Profile</li> */}
+                                <li className="tw:cursor-pointer tw:px-4 tw:py-2 tw:hover:bg-gray-100 tw:dark:tw:hover:bg-gray-700" onClick={() => { setIsDropdownOpen(false); navigate('/profile'); }}>Profile</li>
                                 {/* <li className="tw:cursor-pointer tw:px-4 tw:py-2 tw:hover:bg-gray-100 tw:dark:tw:hover:bg-gray-700">Settings</li> */}
-                                <li className="tw:cursor-pointer tw:px-4 tw:py-2 tw:hover:bg-gray-100 tw:dark:tw:hover:bg-gray-700" onClick={() => { navigate('/logout') }}>Logout</li>
+                                <li className="tw:cursor-pointer tw:px-4 tw:py-2 tw:hover:bg-gray-100 tw:dark:tw:hover:bg-gray-700" onClick={() => { setIsDropdownOpen(false); navigate('/logout'); }}>Logout</li>
                             </ul>
                         </div>
                     )}

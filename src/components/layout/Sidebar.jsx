@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import { FaAngleLeft } from "react-icons/fa";
-import { RxDashboard } from "react-icons/rx";
-import { RxPerson } from "react-icons/rx";
-import { RxGear } from "react-icons/rx";
-import { GiWeightLiftingUp } from "react-icons/gi";
+import { RxDashboard, RxPerson, RxGear } from "react-icons/rx";
+import { GiWeightLiftingUp, GiBiceps, GiCycling } from "react-icons/gi";
+import { GrYoga, GrGroup } from "react-icons/gr";
 import { RiMoneyRupeeCircleLine } from "react-icons/ri";
 import { HiOutlineAdjustments } from "react-icons/hi";
 import logo from "../../assets/logo.png";
@@ -18,35 +17,42 @@ function Sidebar({ isCollapsed, toggleSidebar }) {
     const [Menus, setMenus] = useState([]);
 
     const buildSideMenu = () => {
+        // Admin Side Menu
         if (userData.roles.indexOf('Admin') !== -1) {
             setMenus([
                 { title: "Dashboard", icon: <RxDashboard />, link: '/' },
                 // { title: "Settings", icon: <RxGear />, link: '/', gap: true },
                 { title: "Users", icon: <RxPerson />, link: '/users' },
+                { title: "Clients", icon: <GrGroup />, link: '/clients' },
                 { title: "Memberships", icon: <RiMoneyRupeeCircleLine />, link: '/memberships' },
                 { title: "Plans", icon: <HiOutlineAdjustments />, link: '/plans' },
-                { title: "Workouts", icon: <GiWeightLiftingUp />, link: '/workouts' }
-
+                { title: "Workouts", icon: <GiWeightLiftingUp />, link: '/workouts' },
+                { title: "Assign Workouts", icon: <GrYoga />, link: '/assign-workouts' },
+                // { title: "Assigned Workouts", icon: <GiCycling />, link: '/my-assigned-workouts' }
             ])
         }
+        // Front Office Side Menu
         else if (userData.roles.indexOf('Receptionist') !== -1) {
             setMenus([
                 { title: "Dashboard", icon: <RxDashboard />, link: '/' },
                 { title: "Memberships", icon: <RiMoneyRupeeCircleLine />, link: '/users' },
-                { title: "Clients", icon: <GiWeightLiftingUp />, link: '/' }
+                { title: "Clients", icon: <GrGroup />, link: '/clients' }
             ])
         }
+        // Trainer Side Menu
         else if (userData.roles.indexOf('Trainer') !== -1) {
             setMenus([
                 { title: "Dashboard", icon: <RxDashboard />, link: '/' },
-                { title: "My Clients", icon: <GiWeightLiftingUp />, link: '/' },
+                // { title: "My Clients", icon: <GrGroup />, link: '/' },
+                { title: "Workouts", icon: <GiWeightLiftingUp />, link: '/workouts' },
+                { title: "Assign Workouts", icon: <GrYoga />, link: '/assign-workouts' }
             ])
         }
+        // Client Side Menu
         else {
             setMenus([
                 { title: "Home", icon: <RxDashboard />, link: '/' },
-                { title: "Workouts", icon: <GiWeightLiftingUp />, link: '/workouts' }
-
+                { title: "My Workouts", icon: <GiWeightLiftingUp />, link: '/my-assigned-workouts' }
             ])
         }
     }

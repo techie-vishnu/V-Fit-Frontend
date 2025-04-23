@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Table, Pagination, Dropdown, Form, InputGroup, Button, Row, Col, Modal, Alert } from 'react-bootstrap';
 
 
-function UserFormModal({ showUserModal, setShowUserModal, data, isUserEdit }) {
-    const [userData, setUserData] = useState({ _id: "", name: "", username: "", email: "", mobile: "", gender: "", roles: [], password: "", confirmPassword: "" });
+function ClientFormModal({ showUserModal, setShowUserModal, data, isUserEdit }) {
+    const [userData, setUserData] = useState({ _id: "", name: "", username: "", email: "", mobile: "", gender: "", password: "", confirmPassword: "" });
     const [errorMessage, setErrorMessage] = useState('');
     const [showAlert, setShowAlert] = useState(false);
     const apiConfig = {
@@ -46,7 +46,6 @@ function UserFormModal({ showUserModal, setShowUserModal, data, isUserEdit }) {
                 ).then(res => {
                     let response = res.data;
                     if (response.success === true) {
-                        // fetchData();
                         setShowUserModal(false);
                     } else if (response.error) {
                         setErrorMessage(response.error);
@@ -220,7 +219,6 @@ function UserFormModal({ showUserModal, setShowUserModal, data, isUserEdit }) {
             ).then(res => {
                 let response = res.data;
                 if (response.success === true) {
-                    // fetchData();
                     setShowUserModal(false);
                 } else if (response.error) {
                     setErrorMessage(response.error);
@@ -259,7 +257,7 @@ function UserFormModal({ showUserModal, setShowUserModal, data, isUserEdit }) {
         <>
             <Modal show={showUserModal} onHide={handleUserModalClose} size='lg'>
                 <Modal.Header closeButton>
-                    <Modal.Title>{isUserEdit ? `Edit User` : `Add User`}</Modal.Title>
+                    <Modal.Title>{isUserEdit ? `Edit Client` : `Add Client`}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <section id="alert-section">
@@ -297,7 +295,7 @@ function UserFormModal({ showUserModal, setShowUserModal, data, isUserEdit }) {
                                 <Form.Control onChange={handleUserFormChange} name="mobile" type="number" placeholder="10 digit mobile number" value={userData.mobile} />
                             </Form.Group>
                         </div>
-                        <div className='row'>
+                        {/* <div className='row'>
                             <div key={`inline-checkbox`} className="mb-3 col-12">
                                 <Form.Label className='me-3'>User Roles</Form.Label>
                                 <Form.Check inline label="Client" value="Client" name="roles" type='checkbox' id={`inline-checkbox-1`} onChange={handleRoleCheck} checked={userData.roles.indexOf('Client') !== -1} />
@@ -305,7 +303,7 @@ function UserFormModal({ showUserModal, setShowUserModal, data, isUserEdit }) {
                                 <Form.Check inline label="Receptionist" value="Receptionist" name="roles" type='checkbox' id={`inline-checkbox-3`} onChange={handleRoleCheck} checked={userData.roles.indexOf('Receptionist') !== -1} />
                                 <Form.Check inline label="Admin" value="Admin" name="roles" type='checkbox' id={`inline-checkbox-4`} onChange={handleRoleCheck} checked={userData.roles.indexOf('Admin') !== -1} />
                             </div>
-                        </div>
+                        </div> */}
                         <div className='row'>
                             <Form.Group className="mb-3 col-md-6" controlId="password">
                                 <Form.Label>
@@ -341,4 +339,4 @@ function UserFormModal({ showUserModal, setShowUserModal, data, isUserEdit }) {
     )
 }
 
-export default UserFormModal
+export default ClientFormModal

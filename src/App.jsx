@@ -10,6 +10,10 @@ import NotFound from './components/notFound/NotFound';
 import Memberships from './components/pages/membership/Memberships';
 import MembershipPlans from './components/pages/membership/MembershipPlans';
 import Workouts from './components/pages/workouts/Workouts';
+import UserProfile from './components/pages/users/UserProfile';
+import AssignWorkout from './components/pages/workouts/AssignWorkout';
+import AssignedWorkouts from './components/pages/workouts/AssignedWorkouts';
+import Clients from './components/pages/users/Clients';
 
 
 function App() {
@@ -20,8 +24,13 @@ function App() {
         <Route path="/logout" element={<Logout />} />
         <Route element={<AppLayout />}>
           <Route path="/" element={<UserRoute><Dashboard /></UserRoute>} />
+          <Route path="/profile" element={<UserRoute><UserProfile /></UserRoute>} />
 
           <Route path="/workouts" element={<UserRoute allowedRoles={['Trainer', 'Admin']}><Workouts /></UserRoute>} />
+          <Route path="/assign-workouts" element={<UserRoute><AssignWorkout /></UserRoute>} />
+          <Route path="/my-assigned-workouts" element={<UserRoute><AssignedWorkouts /></UserRoute>} />
+          <Route path="/clients" element={<UserRoute allowedRoles={['Trainer', 'Admin', 'Receptionist']}><Clients /></UserRoute>} />
+
 
           {/* Admin Only pages */}
           <Route path="/users" element={<UserRoute isAdmin={true}><Users /></UserRoute>} />
